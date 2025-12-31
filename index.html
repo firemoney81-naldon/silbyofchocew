@@ -1,23 +1,630 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+    <!-- Schema.org Product/Service JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "실비다이렉트 보험 비교 서비스",
+      "description": "다양한 보험사의 실비보험 상품을 비교하여 최저가 견적을 제공하는 서비스입니다. 2026년 실손보험 개정 내용을 반영한 맞춤형 정보를 확인하세요.",
+      "brand": {
+        "@type": "Brand",
+        "name": "실비다이렉트 비교"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "KRW",
+        "price": "문의요망",
+        "url": "https://www.example.com/direct-health-insurance"
+      }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "실비다이렉트 보험이란 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "실비다이렉트 보험은 설계사나 대리점 없이 소비자가 인터넷이나 모바일을 통해 직접 가입하는 형태의 실손보험을 의미합니다. 중간 수수료가 없어 일반 보험보다 보험료가 저렴한 것이 특징입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "다이렉트 실비보험과 일반 실비보험의 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "가장 큰 차이는 가입 경로와 보험료입니다. 다이렉트는 설계사 수수료가 절감되어 일반적으로 보험료가 더 저렴합니다. 보장 내용은 동일하지만, 다이렉트는 스스로 상품을 비교해야 하고, 일반 보험은 설계사의 상담을 받을 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026년 실비보험료는 어떻게 변동될 것으로 예상되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년에는 실손보험 갱신 주기가 도래하는 4세대 실손보험 가입자들이 늘어날 것으로 예상됩니다. 비급여 항목의 보험금 청구 이력에 따른 보험료 차등제가 더욱 강화될 가능성이 있으며, 정부의 비급여 관리 정책에 따라 보험료 변동성이 커질 수 있습니다. 가입 시점에 정확한 갱신율과 할인 요인을 확인하는 것이 중요합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "실비다이렉트 보험 가입 시 유의해야 할 점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "다이렉트 가입은 스스로 보장 내용을 꼼꼼히 확인해야 합니다. 특히 자기부담금 비율, 비급여 항목 특약 선택 여부, 재가입 주기 등 핵심 내용을 정확히 숙지해야 나중에 예상치 못한 손해를 방지할 수 있습니다. 필요하다면 전문가의 도움을 받아 비교하는 것을 추천합니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+    <style>
+        :root {
+            --primary-color: #0077c2; /* Deep Blue, professionalism and stability */
+            --secondary-color: #4CAF50; /* Green, representing health and freshness */
+            --accent-color: #FF9800; /* Orange, call to action and highlights */
+            --text-color: #333333;
+            --bg-light: #f4f7f6; /* Soft light gray background */
+            --bg-white: #ffffff;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --border-radius: 10px;
+            --font-main: 'Noto Sans KR', sans-serif;
+        }
+
+        /* Base Reset */
+        body {
+            font-family: var(--font-main);
+            margin: 0; padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--bg-white);
+            border-bottom: 3px solid var(--primary-color);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        header .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: inline-block;
+        }
+        header p {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Navigation Styling */
+        nav {
+            background-color: var(--primary-color);
+            text-align: center;
+            padding: 15px 0;
+        }
+        nav a {
+            color: var(--bg-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #005f9c;
+        }
+
+        /* Hero Section (Main Visual) */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #4db8ff);
+            color: var(--bg-white);
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            background-color: var(--accent-color);
+            color: var(--bg-white);
+            padding: 16px 35px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .cta-btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Sections */
+        main {
+            padding: 30px 0;
+        }
+        section {
+            background-color: var(--bg-white);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        section h2 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        section h3 {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+        section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Quote Form Styling */
+        .quote-form-box {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+        .quote-form-box h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        .quote-form-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        .quote-form-box input[type="text"],
+        .quote-form-box input[type="number"],
+        .quote-form-box select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-row > div {
+            flex: 1;
+        }
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: var(--bg-white);
+            padding: 14px 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        /* Data Visualization (Table/Graph Simulation) */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 1.05em;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            font-weight: 600;
+            text-align: center;
+        }
+        .data-table td:first-child {
+            background-color: #f9f9f9;
+            font-weight: 500;
+        }
+
+        /* Key Highlights List */
+        .highlight-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        .highlight-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .highlight-list li::before {
+            content: "✔";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Keyword/Related Content Styling */
+        .keyword-box {
+            background-color: #e8f5e9; /* Light green for related content */
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+        .keyword-box h3 {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .keyword-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .keyword-list li {
+            background-color: var(--secondary-color);
+            color: var(--bg-white);
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        /* FAQ Section Styling (from previous template, adapted) */
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+        .faq-item h3 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4em;
+            color: var(--primary-color);
+            margin-bottom: 0;
+        }
+        .faq-item h3::after {
+            content: '+';
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            transition: transform 0.3s;
+        }
+        .faq-item.active h3::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        .faq-item p {
+            display: none;
+            padding-top: 10px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        .faq-item.active p {
+            display: block;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: #ccc;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+        footer .container {
+            max-width: 1000px;
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.1em; }
+            section { padding: 25px; }
+            section h2 { font-size: 1.8em; }
+            .form-row { flex-direction: column; }
+            .quote-form-box { margin: 20px auto; }
+            .data-table th, .data-table td { font-size: 0.9em; padding: 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">실비다이렉트 보험 비교센터</a>
+            <p>합리적인 실손보험료, 투명한 가입 과정으로 최적의 보장을 찾아드립니다.</p>
+        </div>
+    </header>
+
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+        <div class="container">
+            <a href="#quote-form">무료 견적 계산</a>
+            <a href="#compare-guide">실비보험 비교 가이드</a>
+            <a href="#2026-info">2026년 최신 정보</a>
+            <a href="#faq">자주 묻는 질문</a>
+            <a href="#contact">전문가 상담</a>
+        </div>
     </nav>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero" id="top">
+            <div class="container">
+                <h1>실비다이렉트 보험료, 1분 안에 최저가 비교하기</h1>
+                <p>복잡한 설계사 상담 없이, 온라인으로 빠르고 정확하게 나만의 실손보험료를 확인하세요.</p>
+                <a href="#quote-form" class="cta-btn">실시간 견적 비교 시작하기</a>
+            </div>
+        </section>
+
+        <section id="quote-form">
+            <div class="container quote-form-box">
+                <h3>실비다이렉트 보험료 맞춤 견적 요청</h3>
+                <p>몇 가지 간단한 정보만으로 나에게 맞는 보험 상품과 예상 보험료를 확인할 수 있습니다.</p>
+                <form action="#" method="post">
+                    <div class="form-row">
+                        <div>
+                            <label for="age">나이</label>
+                            <input type="number" id="age" name="age" min="19" max="60" placeholder="만 나이를 입력하세요" required>
+                        </div>
+                        <div>
+                            <label for="gender">성별</label>
+                            <select id="gender" name="gender" required>
+                                <option value="" disabled selected>선택</option>
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                            </select>
+                        </div>
+                    </div>
+                    <label for="medical-history">최근 2년간 치료 이력 (입원/수술/계속적인 치료 여부)</label>
+                    <input type="text" id="medical-history" name="medical-history" placeholder="예: 2년 이내 감기 치료 외 무" required>
+
+                    <label for="job-type">직업 유형 (위험 등급에 따라 보험료가 달라집니다)</label>
+                    <select id="job-type" name="job-type" required>
+                        <option value="" disabled selected>선택</option>
+                        <option value="office">사무직</option>
+                        <option value="technical">기술직/현장직</option>
+                        <option value="dangerous">고위험직</option>
+                    </select>
+
+                    <label for="coverage-type">원하는 보장 범위</label>
+                    <select id="coverage-type" name="coverage-type" required>
+                        <option value="" disabled selected>선택</option>
+                        <option value="basic">기본형 (통원/입원)</option>
+                        <option value="full">기본형 + 3대 비급여 특약</option>
+                        <option value="premium">종합형 (특약 포함)</option>
+                    </select>
+
+                    <button type="submit" class="submit-btn">나에게 맞는 실비다이렉트 보험료 확인하기</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="compare-guide">
+            <div class="container">
+                <h2>실비다이렉트 보험료 절약 핵심 가이드</h2>
+                <p>실손보험은 모든 보험사의 보장 내용이 거의 동일하기 때문에, 다이렉트 가입을 통해 보험료를 절약하는 것이 가장 중요합니다. 다이렉트 상품은 설계사 수수료가 제외되어 같은 보장이라도 10~30% 저렴할 수 있습니다. 하지만 가입 시 꼼꼼히 체크해야 할 사항들이 많습니다.</p>
+
+                <h3>1. 실비다이렉트, 왜 저렴한가요?</h3>
+                <p>실비다이렉트(Direct)는 말 그대로 중간 유통 과정 없이 보험사와 소비자가 직접 계약하는 방식입니다. 일반 보험 가입 시 발생하는 설계사 수수료나 지점 운영 비용 등이 절약되어 보험료가 낮아집니다. 최근에는 보험사들이 다이렉트 채널에 대한 투자를 늘리면서 다양한 할인 프로모션도 제공하고 있습니다.</p>
+
+                <h3>2. 실손보험 가입 시 체크해야 할 핵심 요소</h3>
+                <ul class="highlight-list">
+                    <li><strong>4세대 실손보험의 특징 이해:</strong> 2021년 7월 이후 출시된 4세대 실손보험은 비급여 항목의 보험금 청구 이력에 따라 갱신 시 보험료가 할인되거나 할증되는 차등제가 적용됩니다. 본인의 건강 상태와 병원 이용 빈도를 고려하여 가입하는 것이 중요합니다.</li>
+                    <li><strong>자기부담금 비율 확인:</strong> 4세대 실손보험의 자기부담금은 급여 20%, 비급여 30%로 설정되어 있습니다. 이 비율에 따라 실제로 본인이 부담하는 의료비가 달라지므로 정확히 확인해야 합니다.</li>
+                    <li><strong>3대 비급여 특약 선택:</strong> 도수치료, 체외충격파치료, 증식치료, 비급여 주사료, 비급여 MRI는 특약으로 분리되어 있습니다. 본인이 해당 치료를 받을 가능성이 있다면 특약을 추가하고, 그렇지 않다면 보험료를 낮추기 위해 제외할 수 있습니다.</li>
+                </ul>
+
+                <h3>3. 실비다이렉트 보험료 비교, 어떻게 해야 하나요?</h3>
+                <p>다이렉트 실비보험 비교 시에는 단순히 '최저가'만을 기준으로 선택해서는 안 됩니다. 각 보험사마다 갱신율, 심사 기준, 부가 서비스 등에 미세한 차이가 있을 수 있습니다. 여러 보험사의 견적을 받아보고, 장기적인 관점에서 유리한 상품을 선택하는 것이 현명합니다. 저희 서비스를 통해 여러 보험사의 상품을 한눈에 비교할 수 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="2026-info">
+            <div class="container">
+                <h2>2026년 실비다이렉트 보험료 전망 및 변화 예측</h2>
+                <p>실손보험은 매년 정부 정책과 의료 기술 변화에 따라 갱신율 및 보장 내용에 변화가 생깁니다. 특히 2026년은 4세대 실손보험 가입자들의 첫 갱신이 본격화되면서 보험료 변동 폭이 주목되는 시기입니다. 주요 변화 예측은 다음과 같습니다.</p>
+
+                <h3>1. 비급여 항목 관리 강화와 보험료 차등제 확대</h3>
+                <p>2026년 이후에는 과도한 비급여 진료를 억제하기 위한 정부의 정책이 더욱 강화될 가능성이 높습니다. 4세대 실손보험의 비급여 보험료 차등제가 안정화되면서, 보험금 청구가 많은 가입자는 할증, 적은 가입자는 할인이 명확해질 것입니다. 다이렉트 가입자라도 본인의 청구 이력 관리가 중요해집니다.</p>
+
+                <h3>2. 신기술 의료비 심사 기준 변화</h3>
+                <p>새로운 의료 기술(첨단 치료 등)이 등장함에 따라, 2026년 이후에는 실손보험 약관에 해당 기술의 급여/비급여 적용 기준이 보다 구체적으로 명시될 수 있습니다. 다이렉트 가입 시에는 최신 약관을 반드시 확인하여 예상치 못한 보장 제외 항목이 없는지 확인해야 합니다.</p>
+
+                <h3>3. 고령자 가입 조건 변화 및 상품 다양화</h3>
+                <p>고령화 사회 심화에 따라 2026년에는 고령자를 위한 실비보험 상품이 더욱 다양해질 것입니다. 유병력자도 가입 가능한 간편심사형 상품의 가입 문턱이 낮아지거나, 고령자 전용 다이렉트 상품이 출시될 가능성이 높습니다. 다이렉트 가입은 이러한 새로운 상품을 빠르게 비교하고 선택하는 데 유리합니다.</p>
+
+                <h3>4. 2026년 실비보험료 예상 변동표 (예시)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>가입자 유형</th>
+                            <th>2025년 평균 보험료 (예시)</th>
+                            <th>2026년 예상 변동률 (예측치)</th>
+                            <th>주요 변동 요인</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>30대 남성 (무사고)</td>
+                            <td>35,000원</td>
+                            <td>-5% ~ 0% (할인)</td>
+                            <td>4세대 실손보험 무사고 할인 적용, 건강 증진형 상품 연계</td>
+                        </tr>
+                        <tr>
+                            <td>50대 여성 (청구 이력 많음)</td>
+                            <td>50,000원</td>
+                            <td>+10% ~ +20% (할증)</td>
+                            <td>비급여 항목 청구 이력에 따른 할증 강화, 연령대 위험률 증가</td>
+                        </tr>
+                        <tr>
+                            <td>40대 남성 (간편심사형)</td>
+                            <td>60,000원</td>
+                            <td>0% ~ +5%</td>
+                            <td>유병력자 상품 갱신율 안정화, 의료비 증가율 반영</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.9em; margin-top:10px;">*위 표는 예측치이며, 개인별 보험료는 가입 시점의 상품 구조 및 건강 상태에 따라 상이할 수 있습니다. 정확한 견적은 비교 서비스를 이용해 확인하세요.</p>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2>실비다이렉트 가입 관련 자주 묻는 질문 (FAQ)</h2>
+
+                <div class="faq-item">
+                    <h3>Q. 다이렉트로 가입하면 보장 내용이 불리하지 않나요?</h3>
+                    <p>A. 아닙니다. 실손보험은 표준약관에 따라 모든 보험사의 보장 내용이 동일합니다. 다이렉트와 일반 가입의 차이는 오직 가입 경로와 수수료 유무입니다. 다이렉트 가입 시에도 보장 범위는 동일하며, 보험료가 저렴하다는 장점이 있습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Q. 유병력자도 실비다이렉트 보험 가입이 가능한가요?</h3>
+                    <p>A. 네, 가능합니다. 최근에는 건강한 사람만 가입할 수 있는 표준형 실손보험 외에도, 유병력자를 위한 '간편 심사형 실손보험' 상품이 다이렉트로도 제공됩니다. 병력이 있어도 간단한 질문 몇 가지에만 해당하지 않으면 가입할 수 있습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Q. 실비다이렉트 보험 가입 후 청구 과정은 복잡한가요?</h3>
+                    <p>A. 그렇지 않습니다. 최근 대부분의 보험사들은 모바일 앱을 통해 서류 촬영만으로 간편하게 보험금을 청구할 수 있는 시스템을 갖추고 있습니다. 다이렉트 가입 여부와 관계없이 청구 절차는 동일합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Q. 실비다이렉트 가입 시 나이 제한이 있나요?</h3>
+                    <p>A. 일반적으로 실손보험은 만 15세부터 65세까지 가입이 가능하며, 상품에 따라 70세까지 확대되는 경우도 있습니다. 다만 고령자는 가입 가능한 상품 종류가 제한되거나 보험료가 높아질 수 있습니다. 다이렉트 비교를 통해 나이에 맞는 상품을 찾아보세요.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Q. 갱신 시 보험료 할증은 얼마나 되나요?</h3>
+                    <p>A. 4세대 실손보험은 갱신 시 비급여 청구 금액에 따라 할증률이 다르게 적용됩니다. 청구액 100만 원 미만은 보험료 변동이 없거나 할인되며, 100만 원 이상 청구 시 단계적으로 할증이 적용됩니다. 최대 300%까지 할증될 수 있으나, 할증된 보험료는 다음 갱신 시 무사고인 경우 다시 할인됩니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="related-keywords">
+            <div class="container keyword-box">
+                <h3>함께 많이 찾는 키워드 (실비다이렉트 연관 키워드 분석)</h3>
+                <ul class="keyword-list">
+                    <li>#실비보험료계산기</li>
+                    <li>#4세대실손보험</li>
+                    <li>#유병력자실비보험</li>
+                    <li>#실비보험비갱신형</li>
+                    <li>#다이렉트보험료절약</li>
+                    <li>#실손보험갱신율</li>
+                    <li>#보험료할증기준</li>
+                    <li>#실비보험가입조건</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="trusted-links">
+            <div class="container">
+                <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+                <ul class="highlight-list">
+                    <li><a href="https://www.fss.or.kr/" target="_blank" rel="noopener">금융감독원 (FSS)</a> : 실손보험 표준약관 및 소비자 유의사항, 보험사 정보 등 확인 (공신력 1)</li>
+                    <li><a href="https://www.nhis.or.kr/nhis/index.do" target="_blank" rel="noopener">국민건강보험공단</a> : 국민건강보험 보장 내용 및 급여 항목 정보 확인 (공신력 2)</li>
+                    <li><a href="https://www.korea.go.kr/service/detailPage.do?srvId=G010000010" target="_blank" rel="noopener">대한민국 정부포털</a> : 실손보험 관련 정부 정책 및 가이드라인 (공신력 3)</li>
+                    <li><a href="https://ko.wikipedia.org/wiki/%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98" target="_blank" rel="noopener">실손보험 - 위키백과</a> : 실손보험의 역사 및 정의에 대한 객관적 정보 (공신력 4)</li>
+                    <li><a href="https://www.consumer.go.kr/user/cn/main/index.do" target="_blank" rel="noopener">한국소비자원</a> : 실손보험 소비자 불만 사례 및 분쟁 해결 정보 (공신력 5)</li>
+                </ul>
+                <p>위 자료들은 실비보험 가입 시 법적 기준, 보장 내용, 소비자 권리 등을 확인하는 데 유용한 정보입니다.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>전문가와 1:1 상담하기</h2>
+                <p>복잡한 실비보험 가입, 혼자 고민하지 마세요. 다이렉트 가입 전 정확한 정보가 필요하다면 전문가 상담을 통해 나에게 맞는 최적의 플랜을 확인하세요.</p>
+                <a href="#quote-form" class="cta-btn">무료 상담 신청</a>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <footer>
+        <div class="container">
+            <p><strong>실비다이렉트 보험 비교센터</strong> | &copy; 2026 All Rights Reserved.</p>
+            <p>
+                <a href="#">개인정보처리방침</a> |
+                <a href="#">이용약관</a> |
+                <a href="#">문의하기</a>
+            </p>
+            <p style="margin-top:15px; font-size:0.85em;">본 사이트는 실비다이렉트 보험 비교 정보를 제공하며, 실제 상품 계약은 각 보험사와 직접 진행됩니다.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for FAQ toggle function -->
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+
+  
